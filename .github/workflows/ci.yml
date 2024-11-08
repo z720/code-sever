@@ -9,6 +9,7 @@ on:
       - main
       - develop
       - docker
+      - steroid
     tags:
       - 'v*.*.*'
   pull_request:
