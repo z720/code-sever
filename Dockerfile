@@ -15,7 +15,7 @@ WORKDIR /mongosh
 RUN 
 RUN if [ "$TARGETPLATFORM" = "linux/arm64" ]; \
     then export  MONGO_ARCH=arm64 \
-    else export MONGO_ARCH=amd64; \
+    else export MONGO_ARCH=x64; \
     fi \
     && echo "Downloading Mongosh ${MONGO_ARCH}" \
     && curl --silent -o /mongosh/mongosh.tgz https://downloads.mongodb.com/compass/mongosh-${MONGOSH_VERSION}-linux-${MONGO_ARCH}.tgz
