@@ -26,8 +26,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           # list of Docker images to use as base name for tags
-          images: |
-            ghcr.io/z720/code-server
+          images: ${{ env.REGISTRY }}/${{ github.repository }}
+          
+          # ghcr.io/z720/code-server
           # generate Docker tags based on the following events/attributes
           tags: |
             type=schedule
