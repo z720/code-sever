@@ -21,17 +21,22 @@ ENV NODE_VERSION=23.1.0
 
 ### Root section
 USER root
+SHELL ["/bin/bash", "-c"]
 # Install packages
 
 #apt-get update
 RUN apt-get update && apt-get install -y curl zip unzip
 # RUN  apt-get update && apt-get install -y default-jdk gnugpg
-RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+#RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
 
 # Install NVM script 
 COPY --from=nvm /tmp/nvm.sh /tmp/nvm.sh
 RUN chown -R coder:coder /tmp/nvm.sh  && chmod +x /tmp/nvm.sh
+
+#sdkman
+RUN curl -s "https://get.sdkman.io" | bash
+RUN source "/root/.sdkman/bin/sdkman-init.sh"
 
 # Install mongosh
 COPY --from=mongosh /mongosh/ /usr/share/mongosh/
@@ -43,12 +48,12 @@ RUN ln -s /usr/share/mongosh/bin/* /usr/local/bin/
 USER coder
 WORKDIR /home/coder
 
-RUN curl -s "https://get.sdkman.io" | bash
+#RUN curl -s "https://get.sdkman.io" | bash
 # this SHELL command is needed to allow using source
-SHELL ["/bin/bash", "-c"]  
-RUN source "/root/.sdkman/bin/sdkman-init.sh"   \
-                && sdk install java  \
-                && sdk install quarkus
+#SHELL ["/bin/bash", "-c"]  
+#RUN source "/root/.sdkman/bin/sdkman-init.sh"   \
+#RUN sdk install java  \
+#    && sdk install quarkus
 # Install NVM for user
 RUN /tmp/nvm.sh && rm -f /tmp/nvm.sh 
 # install node and npm
