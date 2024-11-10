@@ -1,0 +1,17 @@
+services:
+  app:
+    container_name: code-server-4.95.1
+    image: docker pull ghcr.io/z720/code-server:latest
+    hostname: code-server
+    restart: unless-stopped 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${HOST_HOME:-~}/.config:/home/coder/.config 
+      - ${HOST_HOME:-~}/.ssh:/home/coder/.ssh 
+      - ${HOST_HOME:-~}/dotfiles:/home/coder/dotfiles 
+      - ${HOST_HOME:-~}/workspaces/vscode-server:/home/coder/project 
+    ports:
+      # Expose dev port for apps to test
+      - 3000:3000 
+      # Expose app port
+      - 8080:8080 
