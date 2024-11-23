@@ -1,5 +1,9 @@
-# code-server with nvm
+# code-server with dev tools
 
-This image includes NVM and latest version of node pre-installed in the standard [code-server](https://github.com/coder/code-server) image
+This image includes
+- NVM and the latest version of node
+- java with quarkus
+- mongosh
 
+pre-installed in the standard [code-server](https://github.com/coder/code-server) image
 
