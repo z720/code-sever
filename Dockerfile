@@ -24,7 +24,7 @@ RUN rm -rf /mongosh/mongosh.tgz
 
 
 # Code server starts here
-FROM ghcr.io/coder/code-server:4.95.3-ubuntu
+FROM ghcr.io/coder/code-server:4.96.2ß-ubuntu
 ARG WITH_PACKAGES=python3
 # Node config
 ENV NVM_DIR=/home/coder/.nvm
