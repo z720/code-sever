@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: code-server-4.95.1
+    container_name: code-server-4.96.2
     image: docker pull ghcr.io/z720/code-server:latest
     hostname: code-server
     restart: unless-stopped 
