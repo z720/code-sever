@@ -8,8 +8,7 @@ on:
     branches: 
       - main
       - develop
-      - docker
-      - steroid
+      - 'features/**'
     tags:
       - 'v*.*.*'
   pull_request:
