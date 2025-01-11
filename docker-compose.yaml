@@ -1,7 +1,10 @@
 services:
   app:
-    container_name: code-server-4.96.2
-    image: docker pull ghcr.io/z720/code-server:latest
+    container_name: code-server-${VERSION:-4.96.2}
+    image: ghcr.io/z720/code-server:${VERSION:-4.96.2}
+    build:
+      context: .
+      dockerfile: Dockerfile
     hostname: code-server
     restart: unless-stopped 
     volumes:
