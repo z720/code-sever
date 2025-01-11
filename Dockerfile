@@ -1,3 +1,8 @@
+## Parametrized build
+# Code Server main version
+ARG CODESERVER_VERSION=4.96.2
+
+
 # Get NVM
 FROM curlimages/curl AS nvm
 ENV  NVM_VERSION=v0.40.1
@@ -25,8 +30,10 @@ RUN rm -rf /mongosh/mongosh.tgz
 FROM curlimages/curl AS dockercli
 RUN curl --silent -o /tmp/docker.asc https://download.docker.com/linux/ubuntu/gpg 
 
+####################################################################
 # Code server starts here
-FROM ghcr.io/coder/code-server:4.96.2-ubuntu
+####################################################################
+FROM ghcr.io/coder/code-server:${CODESERVER_VERSION}-ubuntu
 ARG WITH_PACKAGES=python3
 # Node config
 ENV NVM_DIR=/home/coder/.nvm
