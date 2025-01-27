@@ -1,12 +1,13 @@
 name: Sync upstream release
 
-on: workflow_dispatch
-
-env: 
-  UPSTREAM: coder/code-server
+on:
+  workflow_dispatch:
+  schedule: 
+    - cron: "3 7 * * *"
 
 jobs: 
   check:
+    name: Check last version
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.upstream.outputs.release }}
@@ -36,6 +37,7 @@ jobs:
             echo "update=true" >> $GITHUB_OUTPUT
           fi
   update:
+    name: Update to last version
     runs-on: ubuntu-latest
     needs: check
     if: needs.check.outputs.update == true
@@ -46,11 +48,11 @@ jobs:
     - name: Update versions
       id: replace-build
       run: sed -i '/^ARG CODESERVER_VERSION=/s/.*/ARG CODESERVER=${{ steps.stripv.outputs.version }}/' Dockerfile
-    - name: Configurer les informations d'identification de Git
+    - name: Setup committer
       run: |
         git config user.email "action@github.com"
         git config user.name "GitHub Action"
-    - name: Commuter les fichiers modifiés
+    - name: Commit files and push
       run: |
         git add .
         git commit -m "Bump code server version ${{ steps.stripv.outputs.version }}"
